@@ -1,0 +1,10 @@
+- name: Run proxy container
+  docker_container:
+    name: proxy
+    image: wardkhalife/proxy:latest
+    ports:
+      - "80:80"
+    networks:
+      - name: my_network
+    state: started
+    restart_policy: always

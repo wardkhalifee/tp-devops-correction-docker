@@ -1,0 +1,12 @@
+- name: Run API container
+  docker_container:
+    name: myapp
+    image: wardkhalife/api:latest
+    env:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/db
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: password
+    networks:
+      - name: my_network
+    state: started
+    restart_policy: always
