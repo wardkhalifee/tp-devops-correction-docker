@@ -27,7 +27,7 @@ jobs:
             -Dsonar.projectKey=wardkhalifee_tp-devops-correction-docker \
             -Dsonar.organization=wardkhalifee \
             -Dsonar.host.url=https://sonarcloud.io \
-            -Dsonar.login=${{ secrets.SONAR_TOKEN }}  
+          -Dsonar.login=${{ secrets.SONAR_TOKEN }}  
         
   build-and-push-docker-image:
     needs: test-backend
@@ -81,4 +81,4 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
 
       - name: Run Ansible playbook
-        run: ansible-playbook -i inventories/ci.ini playbook.yml --extra-vars "ansible_host=${{ secrets.SERVER_HOST }}"
+        run: ansible-playbook -i ansible/inventories/ci.ini ansible/playbook.yml --extra-vars "ansible_host=${{ secrets.SERVER_HOST }}"
