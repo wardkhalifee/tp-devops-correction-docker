@@ -79,6 +79,14 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H YOUR_SERVER_IP >> ~/.ssh/known_hosts
 
       - name: Run Ansible playbook
         run: ansible-playbook -i ansible/inventories/ci.ini ansible/playbook.yml --extra-vars "ansible_host=${{ secrets.SERVER_HOST }}"
+
+
+      - name: Build and push front
+        run: |
+          docker build -t wardk/front:latest front/
+          echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+          docker push wardk/front:latest
