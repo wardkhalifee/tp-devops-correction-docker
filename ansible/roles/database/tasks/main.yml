@@ -1,11 +1,11 @@
 - name: Run database container
   docker_container:
-    name: mydb
-    image: postgres:15
+    name: database
+    image: wardkhalife/tp-devops-database:latest
     env:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: mydb
+      POSTGRES_DB: db
+      POSTGRES_USER: usr
+      POSTGRES_PASSWORD: pwd
     networks:
       - name: my_network
     state: started

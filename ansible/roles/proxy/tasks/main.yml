@@ -1,7 +1,7 @@
 - name: Run proxy container
   docker_container:
     name: proxy
-    image: wardkhalife/proxy:latest
+    image: wardkhalife/tp-devops-httpd:latest
     ports:
       - "80:80"
     networks:
