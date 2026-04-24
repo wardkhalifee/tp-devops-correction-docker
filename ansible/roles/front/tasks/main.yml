@@ -7,8 +7,6 @@
     networks:
       - name: my_network
     ports:
-      - "8080:80"
+      - "3000:80"
     pull: true
     recreate: true
-  vars:
-    ansible_python_interpreter: /opt/docker_venv/bin/python3
