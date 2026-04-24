@@ -6,7 +6,6 @@
     restart_policy: always
     networks:
       - name: my_network
-    ports:
-      - "3000:80"
+
     pull: true
     recreate: true
