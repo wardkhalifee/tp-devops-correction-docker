@@ -61,6 +61,13 @@ jobs:
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/tp-devops-httpd:latest
           push: ${{ github.ref == 'refs/heads/main' }}
 
+      - name: Build image and push front
+        uses: docker/build-push-action@v6
+        with:
+          context: ./front
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/front:latest
+          push: ${{ github.ref == 'refs/heads/main' }}
+
   deploy:
     needs: build-and-push-docker-image
     runs-on: ubuntu-24.04
@@ -81,11 +88,6 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H 54.76.221.170 >> ~/.ssh/known_hosts
 
-      - name: Build and push front
-        run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/front:latest front/
-          echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/front:latest
 
       - name: Run Ansible playbook
         run: ansible-playbook -i ansible/inventories/ci.ini ansible/playbook.yml 
