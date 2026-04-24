@@ -82,7 +82,7 @@ jobs:
           ssh-keyscan -H 54.76.221.170 >> ~/.ssh/known_hosts
 
       - name: Run Ansible playbook
-        run: ansible-playbook -i ansible/inventories/ci.ini ansible/playbook.yml --extra-vars "ansible_host=${{ secrets.SERVER_HOST }}"
+        run: ansible-playbook -i ansible/inventories/ci.ini ansible/playbook.yml 
 
 
       - name: Build and push front
