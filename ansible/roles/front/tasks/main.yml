@@ -1,5 +1,5 @@
 - name: Run front container
-  docker_container:
+  community.docker.docker_container:
     name: front
     image: wardkhalife/front:latest
     state: started
@@ -8,3 +8,7 @@
       - name: my_network
     ports:
       - "8080:80"
+    pull: true
+    recreate: true
+  vars:
+    ansible_python_interpreter: /opt/docker_venv/bin/python3
