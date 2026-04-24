@@ -8,10 +8,8 @@
       SPRING_DATASOURCE_PASSWORD: pwd
     networks:
       - name: my_network
-      
     ports:
     - "8080:8080"
-
     state: started
     restart_policy: always
     recreate: true
